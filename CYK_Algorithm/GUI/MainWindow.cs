@@ -38,7 +38,6 @@ namespace CYK_Algorithm
                 data.Rows.Add();
                 if (counter == 83) counter++;
                 char letter = (char)counter;
-                Console.WriteLine(letter);
                 String sLetter = Char.ToString(letter);
                 data.Rows[data.Rows.Count - 1].ItemArray = new String[] { sLetter };
                 counter++;
@@ -54,6 +53,37 @@ namespace CYK_Algorithm
         private void addColumnButton_Click(object sender, EventArgs e)
         {
             data.Columns.Add();
+        }
+
+        private void checkGrammarButton_Click(object sender, EventArgs e)
+        {
+            String input = inputTextBox.Text;
+            String[,] matrix = new String[data.Rows.Count, data.Columns.Count];
+
+            for (int column = 0; column < data.Columns.Count; column++)
+            {
+                for (int row = 0; row < data.Rows.Count; row++)
+                {
+                    matrix[row, column] = Convert.ToString(data.Rows[row].ItemArray[column]);
+                }
+            }
+
+
+
+
+
+            if (matrix != null)
+            {
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < matrix.GetLength(1); j++)
+                    {
+                        Console.Write(string.Format("{0} ", matrix[i, j]));
+                    }
+                    Console.Write(Environment.NewLine + Environment.NewLine);
+                }
+
+            }
         }
     }
 }

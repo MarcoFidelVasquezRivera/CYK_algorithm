@@ -31,7 +31,7 @@ namespace CYK_Algorithm
         {
             this.table = new System.Windows.Forms.DataGridView();
             this.checkGrammarButton = new System.Windows.Forms.Button();
-            this.input = new System.Windows.Forms.TextBox();
+            this.inputTextBox = new System.Windows.Forms.TextBox();
             this.addColumnButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.addRowButton = new System.Windows.Forms.Button();
@@ -57,14 +57,15 @@ namespace CYK_Algorithm
             this.checkGrammarButton.TabIndex = 1;
             this.checkGrammarButton.Text = "Check";
             this.checkGrammarButton.UseVisualStyleBackColor = true;
+            this.checkGrammarButton.Click += new System.EventHandler(this.checkGrammarButton_Click);
             // 
-            // input
+            // inputTextBox
             // 
-            this.input.Location = new System.Drawing.Point(673, 160);
-            this.input.Name = "input";
-            this.input.Size = new System.Drawing.Size(100, 20);
-            this.input.TabIndex = 2;
-            this.input.Text = "Input Text";
+            this.inputTextBox.Location = new System.Drawing.Point(673, 160);
+            this.inputTextBox.Name = "inputTextBox";
+            this.inputTextBox.Size = new System.Drawing.Size(100, 20);
+            this.inputTextBox.TabIndex = 2;
+            this.inputTextBox.Text = "Input Text";
             // 
             // addColumnButton
             // 
@@ -104,7 +105,7 @@ namespace CYK_Algorithm
             this.Controls.Add(this.addRowButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addColumnButton);
-            this.Controls.Add(this.input);
+            this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.checkGrammarButton);
             this.Controls.Add(this.table);
             this.Name = "Form1";
@@ -119,7 +120,7 @@ namespace CYK_Algorithm
 
         private System.Windows.Forms.DataGridView table;
         private System.Windows.Forms.Button checkGrammarButton;
-        private System.Windows.Forms.TextBox input;
+        private System.Windows.Forms.TextBox inputTextBox;
         private System.Windows.Forms.Button addColumnButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button addRowButton;
