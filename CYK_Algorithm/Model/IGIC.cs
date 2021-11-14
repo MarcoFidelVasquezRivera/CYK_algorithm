@@ -8,6 +8,7 @@ namespace CYK_Algorithm.Model
 {
     public interface IGIC
     {
-        bool CYK();
+        bool CYK(string message);
+        IList<string> LookForProducer(string production);
     }
 }

@@ -11,15 +11,94 @@ namespace CYK_Algorithm.Model
         private IList<string> variables;
         private IList<IList<string>> productions;
 
-        public GIC(IList<String> variables, IList<IList<string>> productions)
+        public GIC(IList<string> variables, IList<IList<string>> productions)
         {
             this.variables = variables;
             this.productions = productions;
         }
 
-        public bool CYK()
+        public bool CYK(string message)
         {
-            throw new NotImplementedException();
+
+            List<string>[,] cykTable = new List<string>[message.Length,message.Length];
+
+            //INICIALIZACIÓN
+            for (int i=0;i< cykTable.GetLength(0);i++)
+            {
+                IList<string> producers = LookForProducer(message.Substring(i,1));
+
+                cykTable[i, 0] = new List<string>();
+                cykTable[i, 0].AddRange(producers);
+
+                Console.WriteLine(message.Substring(i, 1)+"----"+ cykTable[i, 0].ToString());
+            }
+
+            //REPETICIÓN DEL ALGORITMO GENERAL
+            for (int j = 1; j< cykTable.GetLength(1); j++)
+            {
+                for (int i = 0; i < (cykTable.GetLength(0)-j) ; i++)
+                {
+                    List<string> producerVariables = new List<string>();//todas la variables que me pueden producir Xij
+
+                    for (int k = 0; k < j-1 ; k++)
+                    {
+                        List<string> xik = new List<string>(cykTable[i, k]);
+                        List<string> xikjk = new List<string>(cykTable[i+k, j-k]);//obtengo Xik y Xi+k,j−k
+
+                        //realizo la union entre Xik y Xi+k,j−k
+                        List<string> union = new List<string>();
+                        foreach (string element in xik)
+                        {
+                            foreach (string item in xikjk)
+                            {
+                                union.Add(element+item);
+                            }
+                        }
+
+                        foreach (string element in union)//agrego las variables productoras de cada elemento
+                        {
+                            producerVariables.AddRange(LookForProducer(element));
+                        }
+                        
+                    }
+                    producerVariables = producerVariables.Distinct().ToList();//elimino las variables redundantes
+                    cykTable[i, j] = producerVariables;
+                }
+            }
+
+            int maximumColumn = cykTable.GetLength(1);
+
+            foreach (string element in cykTable[0, maximumColumn])
+            {
+                if (element.Equals(variables[0]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        //this method gets a productio, tries to find the variables that produce it and return a List with all of them
+        public IList<string> LookForProducer(string production)
+        {//busca en todas las producciones de cada variable para ver si production está entre una de ellas
+            
+            IList<string> producers = new List<string>();
+            for (int i = 0; i<productions.Count; i++)
+            { 
+                IList<string> currentProductions = productions[i]; // producciones de la variable actual
+                for (int j = 0; j < currentProductions.Count; j++)
+                {
+                    string currentProduction = currentProductions[j];
+                    if (currentProduction.Equals(production))
+                    {//se compara si son iguales y si lo son se añade a la variable y a las productoras 
+                        producers.Add(variables[i]);
+                    }
+                    
+                }
+            }
+
+            return producers;
         }
     }
 }
