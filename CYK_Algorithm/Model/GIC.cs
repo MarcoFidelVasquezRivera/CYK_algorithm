@@ -8,8 +8,13 @@ namespace CYK_Algorithm.Model
 {
     public class GIC : IGIC
     {
-        private IList<string> variables;
-        private IList<IList<string>> productions;
+        public IList<string> variables { get; set; }
+        public IList<IList<string>> productions { get; set; }
+
+        public GIC()
+        {
+
+        }
 
         public GIC(IList<string> variables, IList<IList<string>> productions)
         {

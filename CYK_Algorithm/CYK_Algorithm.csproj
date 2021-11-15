@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="GUI\Program.cs" />
     <Compile Include="Model\GIC.cs" />
+    <Compile Include="Model\GICManager.cs" />
     <Compile Include="Model\IGIC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\MainWindow.resx">
