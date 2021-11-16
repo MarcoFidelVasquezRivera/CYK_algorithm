@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CYK_Algorithm.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,14 @@ namespace CYK_Algorithm
 {
     public partial class Form1 : Form
     {
+        private GICManager manager;
         DataTable data;
         int counter;
         public Form1()
         {
             InitializeComponent();
             generateTable();
+            manager = new GICManager();
             counter = 65;
         }
 
@@ -84,6 +87,8 @@ namespace CYK_Algorithm
                 }
 
             }
+
+            manager.runCYK(matrix, input);
         }
     }
 }
