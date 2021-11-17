@@ -42,34 +42,17 @@ namespace CYK_Algorithm.Model
 
                 cykTable[i, 0] = new List<string>();
                 cykTable[i, 0].AddRange(producers);
-
-                Console.Write(message.Substring(i, 1)+"----");
-                foreach (string element in cykTable[i, 0])
-                {
-                    Console.Write(element);
-                }
-                Console.WriteLine();
             }
 
-            Console.WriteLine(cykTable.GetLength(1)+"ddddddd");
             //REPETICIÓN DEL ALGORITMO GENERAL
             for (int j = 1; j< cykTable.GetLength(1); j++)
             {
                 for (int i = 0; i < (cykTable.GetLength(0)-j) ; i++)
                 {
-                    Console.WriteLine(cykTable.GetLength(0)-j + "ddddddd");
-                    Console.WriteLine(j-1 + "JJJJJJ");
                     List<string> producerVariables = new List<string>();//todas la variables que me pueden producir Xij
 
                     for (int k = 0; k <= j-1 ; k++)
                     {
-                        Console.WriteLine("-----------------------++++++++++++++++++");
-                        foreach (string element in cykTable[i, k])
-                        {
-                            Console.Write(element);
-                        }
-                        Console.WriteLine("-----------------------++++++++++++++++++");
-                        Console.WriteLine("-----------------------++++++++++++++++++");
                         /*foreach (string element in cykTable[i + k+1, j-k])
                         {
                             Console.Write(element);
@@ -77,8 +60,6 @@ namespace CYK_Algorithm.Model
                         Console.WriteLine("-----------------------++++++++++++++++++");*/
 
                         List<string> xik = new List<string>(cykTable[i, k]);
-                        Console.WriteLine("cykTable[i, k]:" + i + k);
-                        Console.WriteLine("cykTable[i+k, j-k]:" + (i+k+1) +"-" + (j-(k+1)));//K MÁS PEQUEÑO SIGNIFICA J MÁS GRANDE
                         List<string> xikjk = new List<string>(cykTable[i+k+1, j-(k+1)]);//obtengo Xik y Xi+k,j−k
 
                         //realizo la union entre Xik y Xi+k,j−k
@@ -90,8 +71,6 @@ namespace CYK_Algorithm.Model
                             {
                                 foreach (string item in xikjk)
                                 {
-                                    Console.Write("cykTable[i, k]:" + element);
-                                    Console.WriteLine("cykTable[i+k, j-k]:" + item);
                                     union.Add(element + item);
                                 }
                             }
@@ -101,39 +80,28 @@ namespace CYK_Algorithm.Model
 
                             foreach (string element in xik)
                             {
-                                Console.WriteLine("cykTable[i, k]:" + element);
                                 union.Add(element);
                             }
                         }
                         else {
                             foreach (string item in xikjk)
                             {
-                                Console.WriteLine("cykTable[i+k, j-k]:" + item);
                                 union.Add(item);
                             }
                         }
 
                         foreach (string element in union)//agrego las variables productoras de cada elemento
                         {
-                            Console.WriteLine(element+"aa");
                             producerVariables.AddRange(LookForProducer(element));
                         }
-                        Console.WriteLine();
-                        Console.WriteLine("-------------------------------");
 
                     }
                     producerVariables = producerVariables.Distinct().ToList();//elimino las variables redundantes
                     cykTable[i, j] = producerVariables;
-                    Console.WriteLine(i+"++"+j);
                 }
             }
 
             int maximumColumn = cykTable.GetLength(1);
-            foreach (string element in cykTable[0, maximumColumn - 1])
-            {
-                Console.WriteLine(maximumColumn - 1);
-                Console.WriteLine(element);
-            }
 
             foreach (string element in cykTable[0, maximumColumn-1])
             {
@@ -164,13 +132,6 @@ namespace CYK_Algorithm.Model
                     
                 }
             }
-            Console.WriteLine("--------------------");
-            foreach (string element in producers)
-            {
-                Console.Write(element);
-            }
-            Console.WriteLine("--------------------");
-
             return producers;
         }
     }

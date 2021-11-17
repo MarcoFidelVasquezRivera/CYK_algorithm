@@ -63,40 +63,34 @@ namespace CYK_Algorithm
             String input = inputTextBox.Text;
             String[,] matrix = new String[data.Rows.Count, data.Columns.Count];
 
-            for (int column = 0; column < data.Columns.Count; column++)
+            if (input != "Input Text")
             {
-                for (int row = 0; row < data.Rows.Count; row++)
+                for (int column = 0; column < data.Columns.Count; column++)
                 {
-                    matrix[row, column] = Convert.ToString(data.Rows[row].ItemArray[column]);
-                }
-            }
-
-            if (matrix != null)
-            {
-                for (int i = 0; i < matrix.GetLength(0); i++)
-                {
-                    for (int j = 0; j < matrix.GetLength(1); j++)
+                    for (int row = 0; row < data.Rows.Count; row++)
                     {
-                        Console.Write(string.Format("{0} ", matrix[i, j]));
+                        matrix[row, column] = Convert.ToString(data.Rows[row].ItemArray[column]);
                     }
-                    Console.Write(Environment.NewLine + Environment.NewLine);
                 }
 
+
+                switch (manager.runCYK(matrix, input))
+                {
+                    case true:
+                        MessageBox.Show("The given input can be generated with this GIC", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+
+                    case false:
+                        MessageBox.Show("The given input cannot be generated with this GIC", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        break;
+                };
+
+            }
+            else
+            {
+                MessageBox.Show("Please input a string", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-            switch (manager.runCYK(matrix, input)) {
-                case true:
-                    MessageBox.Show("The given input can be generated with this GIC", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
-
-                case false:
-                    MessageBox.Show("The given input cannot be generated with this GIC", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    break;
-            };
-                
-                
-                
         }
 
         private void removeRowButton_Click(object sender, EventArgs e)
