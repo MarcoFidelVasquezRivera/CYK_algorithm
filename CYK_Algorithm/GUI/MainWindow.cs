@@ -88,7 +88,10 @@ namespace CYK_Algorithm
 
             }
 
-            manager.runCYK(matrix, input);
+            Console.WriteLine(manager.runCYK(matrix, input));
+                
+                
+                
         }
     }
 }

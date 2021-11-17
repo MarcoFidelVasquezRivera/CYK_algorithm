@@ -45,18 +45,36 @@ namespace CYK_Algorithm.Model
                 {
                     List<string> producerVariables = new List<string>();//todas la variables que me pueden producir Xij
 
-                    for (int k = 0; k < j-1 ; k++)
+                    for (int k = 1; k <= j-1 ; k++)
                     {
                         List<string> xik = new List<string>(cykTable[i, k]);
                         List<string> xikjk = new List<string>(cykTable[i+k, j-k]);//obtengo Xik y Xi+k,j−k
 
                         //realizo la union entre Xik y Xi+k,j−k
                         List<string> union = new List<string>();
-                        foreach (string element in xik)
+
+                        if (xik.Count > 0 && xikjk.Count > 0)
                         {
+                            foreach (string element in xik)
+                            {
+                                foreach (string item in xikjk)
+                                {
+                                    union.Add(element + item);
+                                }
+                            }
+                        }
+                        else if (xik.Count > 0)
+                        {
+
+                            foreach (string element in xik)
+                            {
+                                union.Add(element);
+                            }
+                        }
+                        else {
                             foreach (string item in xikjk)
                             {
-                                union.Add(element+item);
+                                union.Add(item);
                             }
                         }
 
@@ -73,7 +91,7 @@ namespace CYK_Algorithm.Model
 
             int maximumColumn = cykTable.GetLength(1);
 
-            foreach (string element in cykTable[0, maximumColumn])
+            foreach (string element in cykTable[0, maximumColumn-1])
             {
                 if (element.Equals(variables[0]))
                 {
@@ -84,7 +102,7 @@ namespace CYK_Algorithm.Model
             return false;
         }
 
-        //this method gets a productio, tries to find the variables that produce it and return a List with all of them
+        //this method gets a production, tries to find the variables that produce it and return a List with all of them
         public IList<string> LookForProducer(string production)
         {//busca en todas las producciones de cada variable para ver si production está entre una de ellas
             
