@@ -35,6 +35,8 @@ namespace CYK_Algorithm
             this.addColumnButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.addRowButton = new System.Windows.Forms.Button();
+            this.removeRowButton = new System.Windows.Forms.Button();
+            this.removeColumnButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@ namespace CYK_Algorithm
             // 
             // addColumnButton
             // 
-            this.addColumnButton.Location = new System.Drawing.Point(563, 415);
+            this.addColumnButton.Location = new System.Drawing.Point(442, 415);
             this.addColumnButton.Name = "addColumnButton";
             this.addColumnButton.Size = new System.Drawing.Size(81, 23);
             this.addColumnButton.TabIndex = 4;
@@ -97,11 +99,33 @@ namespace CYK_Algorithm
             this.addRowButton.UseVisualStyleBackColor = true;
             this.addRowButton.Click += new System.EventHandler(this.addRowButton_Click);
             // 
+            // removeRowButton
+            // 
+            this.removeRowButton.Location = new System.Drawing.Point(99, 415);
+            this.removeRowButton.Name = "removeRowButton";
+            this.removeRowButton.Size = new System.Drawing.Size(81, 23);
+            this.removeRowButton.TabIndex = 7;
+            this.removeRowButton.Text = "Remove Row";
+            this.removeRowButton.UseVisualStyleBackColor = true;
+            this.removeRowButton.Click += new System.EventHandler(this.removeRowButton_Click);
+            // 
+            // removeColumnButton
+            // 
+            this.removeColumnButton.Location = new System.Drawing.Point(529, 415);
+            this.removeColumnButton.Name = "removeColumnButton";
+            this.removeColumnButton.Size = new System.Drawing.Size(115, 23);
+            this.removeColumnButton.TabIndex = 8;
+            this.removeColumnButton.Text = "Remove Column";
+            this.removeColumnButton.UseVisualStyleBackColor = true;
+            this.removeColumnButton.Click += new System.EventHandler(this.removeColumnButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.removeColumnButton);
+            this.Controls.Add(this.removeRowButton);
             this.Controls.Add(this.addRowButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addColumnButton);
@@ -124,6 +148,8 @@ namespace CYK_Algorithm
         private System.Windows.Forms.Button addColumnButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button addRowButton;
+        private System.Windows.Forms.Button removeRowButton;
+        private System.Windows.Forms.Button removeColumnButton;
     }
 }
 
