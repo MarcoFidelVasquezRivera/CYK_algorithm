@@ -22,7 +22,9 @@ namespace CYK_Algorithm.Model
             for (int i=0; i< gramatic.GetLength(0);i++)
             {
                 variables.Add(gramatic[i,0]);
+                Console.Write(gramatic[i, 0]);
             }
+            Console.WriteLine();
 
             IList<IList<string>> productions = new List<IList<string>>();
 
@@ -30,9 +32,9 @@ namespace CYK_Algorithm.Model
             {
                 IList<string> production = new List<string>();
 
-                for (int j = 0; j < gramatic.GetLength(1); j++)
+                for (int j = 1; j < gramatic.GetLength(1); j++)
                 {
-                    Console.WriteLine(gramatic[i, j].Length);
+                    Console.Write(gramatic[i, j]);
                     if (gramatic[i,j]==null)
                     {
                         j = gramatic.GetLength(1);
@@ -42,12 +44,13 @@ namespace CYK_Algorithm.Model
                         production.Add(gramatic[i, j]);
                     }
                 }
+                Console.WriteLine();
                 productions.Add(production);
             }
 
             gic.variables = variables;
             gic.productions = productions;
-            
+            Console.WriteLine("------------------------------------------------------");
             return gic.CYK(message);
         }
     }
